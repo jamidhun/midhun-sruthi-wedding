@@ -1,0 +1,207 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Type per blueprint: Cormorant Garamond (display), Inter (body),
+   Cinzel (accent / eyebrows). Loaded via <link> in index.html. */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-accent: 'Cinzel', 'Cormorant Garamond', serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Blueprint colour system */
+  --ink: #080808;            /* Background */
+  --surface: #121212;        /* Surface / cards */
+  --surface-2: #181818;
+  --paper: #F5F5F5;          /* Text primary */
+  --paper-dim: #9CA3AF;      /* Text muted */
+  --gold: #D4AF37;           /* Warm gold — highlights, borders */
+  --primary-gold: #C9A45C;   /* Primary gold — interactive */
+  --gold-soft: #C9A45C;      /* eyebrows / labels */
+  --gold-glow: #E8C355;      /* brass flame glow */
+  --hairline: rgba(212, 175, 55, 0.16);
+  --glass: rgba(15, 23, 30, 0.85);   /* glass overlay (nav, modals) */
+  --glow: rgba(212, 175, 55, 0.25);  /* active glow */
+
+  --primary: #C9A45C;
+  --primary-foreground: #080808;
+  --chart-1: #D4AF37;
+  --chart-2: #C9A45C;
+  --chart-3: #E8C355;
+  --chart-4: #B8860B;
+  --chart-5: #A67C52;
+  --radius: 0.5rem;
+  --background: #080808;
+  --foreground: #F5F5F5;
+  --card: #121212;
+  --card-foreground: #F5F5F5;
+  --popover: #121212;
+  --popover-foreground: #F5F5F5;
+  --secondary: #181818;
+  --secondary-foreground: #C9A45C;
+  --muted: #1f1f1f;
+  --muted-foreground: #9CA3AF;
+  --accent: #C9A45C;
+  --accent-foreground: #080808;
+  --destructive: #EF4444;
+  --destructive-foreground: #F5F5F5;
+  --border: rgba(212, 175, 55, 0.16);
+  --input: rgba(18, 18, 18, 0.8);
+  --ring: rgba(201, 164, 92, 0.55);
+  --sidebar: #121212;
+  --sidebar-foreground: #F5F5F5;
+  --sidebar-primary: #C9A45C;
+  --sidebar-primary-foreground: #F5F5F5;
+  --sidebar-accent: #C9A45C;
+  --sidebar-accent-foreground: #080808;
+  --sidebar-border: rgba(212, 175, 55, 0.16);
+  --sidebar-ring: #C9A45C;
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { @apply border-border; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    background-color: #080808;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection { background: rgba(201, 164, 92, 0.3); color: #fff; }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href], select:not(:disabled) { @apply cursor-pointer; }
+}
+
+@layer components {
+  .container {
+    width: 100%; margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { .container { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container { padding-inline: 2rem; max-width: 1280px; } }
+
+  .flex { min-height: 0; min-width: 0; }
+
+  /* Eyebrow — Cinzel small caps, wide tracked (blueprint accent) */
+  .eyebrow {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .rule-fade {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* Glass overlay (nav, modals) */
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--hairline);
+  }
+
+  /* Brass / flame glow for active luxe surfaces */
+  .brass-glow { box-shadow: 0 0 40px var(--glow); }
+
+  /* Kerala wood (teak/rosewood) — satin dark grain for vinyl base / borders */
+  .wood {
+    background:
+      repeating-linear-gradient(92deg, #2a1d12 0px, #241810 2px, #2e2114 5px, #241810 8px),
+      linear-gradient(160deg, #2e2114, #160f09);
+  }
+
+  /* Subtle Kerala mural texture — faint stylized leaf/wave, ~4% weight */
+  .mural::before {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%23D4AF37' stroke-width='1'><path d='M10 60 Q35 20 60 60 T110 60'/><path d='M10 90 Q35 50 60 90 T110 90'/><circle cx='60' cy='30' r='3'/><circle cx='30' cy='62' r='2'/><circle cx='90' cy='62' r='2'/></g></svg>");
+    background-size: 120px 120px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
