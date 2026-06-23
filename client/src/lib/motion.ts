@@ -1,62 +1,63 @@
 import type { Variants } from "framer-motion";
 
 /**
- * MOTION SYSTEM
- * Shared easings + reveal variants. The blueprint's exact section settings live
- * here (heroText, sectionWrapper, galleryCard) alongside general-purpose helpers
- * used across the page. Transform/opacity/filter only → smooth 60fps.
+ * MOTION SYSTEM — one easing curve, calm cinematic timings.
+ * A single ease-out curve is used across every reveal and transition so the
+ * whole site decelerates the same way. Transform/opacity only → smooth 60fps.
  */
 
-// Easings (blueprint §5)
-export const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];          // section wrappers
-export const EASE_HERO: [number, number, number, number] = [0.25, 1, 0.5, 1];      // hero text
-export const EASE_GALLERY: [number, number, number, number] = [0.16, 1, 0.3, 1];   // gallery cards
-export const EASE_IN_OUT: [number, number, number, number] = [0.65, 0, 0.35, 1];
+// The one curve, used everywhere. Soft, confident deceleration (no abrupt stops).
+export const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+// Aliases kept so existing imports keep working — all point at the same curve.
+export const EASE_HERO = EASE;
+export const EASE_GALLERY = EASE;
+export const EASE_IN_OUT = EASE;
 
 export const viewportOnce = { once: true, margin: "-12% 0px -12% 0px" } as const;
 
-// ── Blueprint §5 — exact section variants ──────────────────────────────────
+// Hero title lines — staggered ~200ms, each ~1s (calm, never rushed).
 export const heroText: Variants = {
-  hidden: { y: 40, opacity: 0 },
+  hidden: { y: 32, opacity: 0 },
   visible: (i: number = 0) => ({
     y: 0,
     opacity: 1,
-    transition: { duration: 1.0, delay: 0.2 + i * 0.2, ease: EASE_HERO },
+    transition: { duration: 1.0, delay: 0.3 + i * 0.2, ease: EASE },
   }),
-  exit: { y: -20, opacity: 0, transition: { duration: 0.6, ease: EASE_HERO } },
 };
 
+// Section entrance — gentle settle, ~1s.
 export const sectionWrapper: Variants = {
-  hidden: { opacity: 0, scale: 0.98 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1.2, delay: 0.1, ease: EASE } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: EASE } },
 };
 
 export const galleryCard: Variants = {
-  hidden: { x: 100, opacity: 0 },
+  hidden: { y: 28, opacity: 0 },
   visible: (i: number = 0) => ({
-    x: 0,
+    y: 0,
     opacity: 1,
-    transition: { duration: 0.8, delay: i * 0.15, ease: EASE_GALLERY },
+    transition: { duration: 0.95, delay: i * 0.12, ease: EASE },
   }),
 };
 
-// ── General helpers used by the content sections ───────────────────────────
+// ── General helpers ─────────────────────────────────────────────────────────
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 1.0, ease: EASE } },
 };
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 26 },
+  hidden: { opacity: 0, y: 22 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.95, ease: EASE } },
 };
 
+// Lighter blur (8px) keeps the develop-into-focus feel without GPU jitter.
 export const blurUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(12px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.1, ease: EASE } },
+  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.0, ease: EASE } },
 };
 
-export const staggerParent = (staggerChildren = 0.12, delayChildren = 0.08): Variants => ({
+export const staggerParent = (staggerChildren = 0.14, delayChildren = 0.1): Variants => ({
   hidden: {},
   visible: { transition: { staggerChildren, delayChildren } },
 });

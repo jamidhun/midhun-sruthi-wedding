@@ -1,9 +1,10 @@
-Drop your wedding photos here using these exact file names. They load
-automatically — no code changes needed. Missing files show an elegant golden
-placeholder until you add them.
+Drop your photos here using these exact file names. They load automatically —
+no code changes needed. Any missing file shows an elegant placeholder until you
+add it.
 
-  hero-1.jpg, hero-2.jpg          — full-screen hero backgrounds (landscape)
-  gallery-1.jpg … gallery-20.jpg  — the swipe gallery (use as many as you like)
+  hero.jpg        — full-screen hero background (landscape, ~2000px wide)
+  gallery-1.jpg   — gallery frame 1
+  gallery-2.jpg   — gallery frame 2
+  gallery-3.jpg   — gallery frame 3
 
-To change which photos appear or add captions, edit client/src/data/wedding.ts.
-JPG is expected; landscape suits hero, square-ish suits the gallery.
+That's all the site uses. JPG is expected; keep the same names.

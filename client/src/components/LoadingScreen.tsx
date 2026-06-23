@@ -1,12 +1,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { weddingData } from "@/data/wedding";
+import { EASE } from "@/lib/motion";
 
 /**
- * CINEMATIC LOADER (blueprint §1) — three stages:
- *   1. Init  (0.8s): monogram pulses.
- *   2. Build (1.5s): backdrop blur eases 20px → 5px, brass glow 0.2 → 0.8.
- *   3. Reveal(1.2s): the curtain splits vertically and lifts away.
+ * CINEMATIC LOADER — three calm stages over ~1.8s:
+ *   1. Init  (0.4s): monogram settles with a soft brass glow.
+ *   2. Build (0.8s): backdrop blur eases away, glow deepens.
+ *   3. Reveal(0.6s): the curtain parts and lifts the panel away.
  */
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -23,9 +24,9 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       const t = setTimeout(onComplete, 500);
       return () => clearTimeout(t);
     }
-    const t1 = setTimeout(() => setStage("build"), 800);
-    const t2 = setTimeout(() => setStage("reveal"), 800 + 1500);
-    const t3 = setTimeout(onComplete, 800 + 1500 + 1200);
+    const t1 = setTimeout(() => setStage("build"), 400);
+    const t2 = setTimeout(() => setStage("reveal"), 400 + 800);
+    const t3 = setTimeout(onComplete, 400 + 800 + 600);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete, reduce]);
 
@@ -33,11 +34,11 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
   const Curtain = ({ side }: { side: "left" | "right" }) => (
     <motion.div
-      className="absolute top-0 h-full w-1/2 mural"
+      className="absolute top-0 h-full w-1/2"
       style={{ [side]: 0, background: "linear-gradient(160deg, #15110A 0%, #080808 100%)" }}
       initial={false}
       animate={{ x: parted ? (side === "left" ? "-100%" : "100%") : "0%" }}
-      transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.9, ease: EASE }}
     />
   );
 
@@ -45,7 +46,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
     <motion.div
       className="fixed inset-0 z-[90] overflow-hidden"
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.8, ease: EASE }}
       aria-hidden
     >
       <Curtain side="left" />
@@ -55,37 +56,30 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         className="relative z-10 flex h-full w-full flex-col items-center justify-center"
         animate={{
           opacity: parted ? 0 : 1,
-          filter: stage === "init" ? "blur(20px)" : stage === "build" ? "blur(5px)" : "blur(0px)",
+          filter: stage === "init" ? "blur(14px)" : "blur(0px)",
         }}
-        transition={{ duration: stage === "build" ? 1.5 : 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: EASE }}
       >
         <motion.div
           className="flex h-32 w-32 items-center justify-center rounded-full"
           style={{ border: "1px solid var(--hairline)" }}
+          initial={{ scale: 0.96 }}
           animate={{
-            scale: stage === "init" && !reduce ? [1, 1.06, 1] : 1,
-            boxShadow:
-              stage === "init"
-                ? "0 0 40px rgba(212,175,55,0.2)"
-                : "0 0 60px rgba(212,175,55,0.45)",
+            scale: 1,
+            boxShadow: stage === "init" ? "0 0 30px rgba(212,175,55,0.2)" : "0 0 56px rgba(212,175,55,0.4)",
           }}
-          transition={{
-            scale: { duration: 1.6, repeat: stage === "init" ? Infinity : 0, ease: "easeInOut" },
-            boxShadow: { duration: 1.5, ease: "easeOut" },
-          }}
+          transition={{ duration: 1.0, ease: EASE }}
         >
-          <span
-            className="font-light italic"
-            style={{ fontFamily: "var(--font-display)", fontSize: "3rem", color: "var(--gold)" }}
-          >
+          <span className="font-light italic" style={{ fontFamily: "var(--font-display)", fontSize: "3rem", color: "var(--gold)" }}>
             {weddingData.couple.initials}
           </span>
         </motion.div>
 
         <motion.p
           className="eyebrow mt-8"
-          animate={{ opacity: stage === "init" ? 0.5 : 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: stage === "init" ? 0.6 : 1 }}
+          transition={{ duration: 0.8, ease: EASE }}
         >
           {weddingData.loadingScreen.subtitle}
         </motion.p>

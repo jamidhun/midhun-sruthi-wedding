@@ -7,7 +7,6 @@ import { EnvelopeReveal } from "@/components/EnvelopeReveal";
 import { Navbar } from "@/components/Navbar";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { VinylPlayer } from "@/components/VinylPlayer";
-import { BellWatermark } from "@/components/KeralaAccents";
 import { HeroSection } from "@/components/HeroSection";
 import { CoupleSection } from "@/components/CoupleSection";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -18,7 +17,7 @@ import { Footer } from "@/components/Footer";
 
 type Phase = "loading" | "envelope" | "open";
 
-/** Wraps a content section with an id (for nav) + the blueprint section-wrapper motion. */
+/** Section wrapper — adds the nav anchor id + a calm entrance. */
 function Section({ id, children }: { id: string; children: ReactNode }) {
   return (
     <motion.div id={id} variants={sectionWrapper} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -77,13 +76,11 @@ export default function Home() {
         <HeroSection />
         <Section id="couple"><CoupleSection /></Section>
         <Section id="countdown"><CountdownTimer /></Section>
-        <BellWatermark className="py-2" />
         <Section id="events"><EventsSection /></Section>
         <GallerySection />
         <Section id="rsvp"><RSVPSection /></Section>
       </main>
 
-      <BellWatermark className="pb-10" />
       <Footer />
     </div>
   );

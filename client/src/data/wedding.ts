@@ -8,116 +8,119 @@
 export const weddingData = {
   loadingScreen: {
     enabled: true,
-    subtitle: "A CELEBRATION OF LOVE",
+    subtitle: "A WEDDING CELEBRATION",
   },
 
   couple: {
-    brideName: "Sia",
-    groomName: "Arjun",
-    initials: "A & S",
+    groomFirst: "Midhun",
+    brideFirst: "Sruthi",
+    groomFull: "Midhun J A",
+    brideFull: "Sruthi Chandran",
+    initials: "M & S",
   },
 
   wedding: {
-    date: "2026-12-12T18:00:00+05:30",
-    displayDate: "12 December 2026",
-    time: "6:00 PM",
-    timezone: "IST",
+    // Muhurtham start (IST) — drives the countdown.
+    date: "2026-09-13T11:53:00+05:30",
+    dayName: "Sunday",
+    displayDate: "13 September 2026",
+    malayalamDate: "28 Chingam 1202",
+    muhurtham: "11:53 AM – 12:42 PM",
   },
 
   venue: {
-    name: "The Grand Palace",
-    city: "Kochi",
+    name: "Sree Panimoola Devi Temple",
+    lines: ["Andoorkonam", "Pothencode", "Thiruvananthapuram"],
+    city: "Thiruvananthapuram",
     state: "Kerala",
-    country: "India",
-    address: "Heritage Lane, Fort Kochi, Kerala 682001",
-    googleMapsLink: "https://maps.google.com/maps?q=fort+kochi",
   },
 
   hero: {
     subtitle: "Together with their families",
     scrollIndicator: "SCROLL",
-    backgroundImage: "/photos/hero-1.jpg",
-    backgroundImage2: "/photos/hero-2.jpg",
+    backgroundImage: "/photos/hero.jpg",
   },
 
-  coupleStory: {
-    title: "Two Souls, One Journey",
-    sectionSubtitle: "The Union",
-    description:
-      "We are so happy to celebrate our wedding with you. Join us for a day of love, laughter, and new beginnings.",
-    quote: "Entering a new life of togetherness, with the blessings of our elders and loved ones.",
+  // The Couple section: invitation message + the two families.
+  couplesection: {
+    eyebrow: "The Invitation",
+    title: "With Your Blessings",
+    message:
+      "With the blessings of the Almighty and our beloved elders, we cordially request the pleasure of your gracious presence at the auspicious wedding ceremony of Midhun J A and Sruthi Chandran.",
   },
 
   groom: {
-    name: "Arjun",
-    education: "B.Tech, IIT Bombay",
-    profession: "Software Engineer",
-    parentTitle: "Son of",
-    parents: "Shri & Smt. Gupta",
+    role: "The Groom",
+    name: "Midhun J A",
+    relation: "Son of",
+    parents: ["Mr M Janardhanan Pillai (Venu)", "Mrs K Anitha"],
   },
 
   bride: {
-    name: "Sia",
-    education: "M.Des, NID Ahmedabad",
-    profession: "Creative Director",
-    parentTitle: "Daughter of",
-    parents: "Shri & Smt. Sharma",
+    role: "The Bride",
+    name: "Sruthi Chandran",
+    relation: "Daughter of",
+    parents: ["Mr Chandran Pillai A", "Mrs Priji O P"],
   },
 
   countdown: {
-    title: "Save the Date",
     subtitle: "The Countdown",
+    title: "Save the Date",
   },
-
-  events: [
-    { id: 1, title: "Mehendi", date: "2026-12-10", time: "6:00 PM", location: "The Grand Palace — Courtyard", description: "An evening of music, colour and celebration." },
-    { id: 2, title: "Haldi", date: "2026-12-11", time: "5:00 PM", location: "The Grand Palace — Garden", description: "A traditional morning of turmeric and joy." },
-    { id: 3, title: "Wedding Ceremony", date: "2026-12-12", time: "6:00 PM", location: "The Grand Palace — Main Hall", description: "The exchange of vows and blessings." },
-    { id: 4, title: "Reception", date: "2026-12-12", time: "8:30 PM", location: "The Grand Palace — Banquet Hall", description: "Dinner and celebration with family and friends." },
-  ],
 
   eventsSection: {
-    title: "Wedding Events",
-    subtitle: "The Celebration",
+    subtitle: "The Day",
+    title: "The Celebration",
   },
 
-  // Gallery — uses /photos/gallery-N.jpg (placeholders shown until added).
-  // Add up to gallery-20.jpg; just extend this list.
-  gallery: [
-    { id: 1, title: "Engagement", image: "/photos/gallery-1.jpg" },
-    { id: 2, title: "Pre-Wedding", image: "/photos/gallery-2.jpg" },
-    { id: 3, title: "Candid", image: "/photos/gallery-3.jpg" },
-    { id: 4, title: "Together", image: "/photos/gallery-4.jpg" },
-    { id: 5, title: "Forever", image: "/photos/gallery-5.jpg" },
-    { id: 6, title: "Always", image: "/photos/gallery-6.jpg" },
-  ],
+  // ONLY two events: the ceremony and the reception.
+  ceremony: {
+    label: "Wedding Ceremony",
+    dayName: "Sunday",
+    date: "13 September 2026",
+    malayalamDate: "28 Chingam 1202",
+    muhurtham: "11:53 AM – 12:42 PM",
+    venueName: "Sree Panimoola Devi Temple",
+    venueLines: ["Andoorkonam", "Pothencode", "Thiruvananthapuram"],
+  },
+
+  reception: {
+    label: "Reception",
+    date: "13 September 2026",
+    time: "5:30 PM onwards",
+    venueName: "Al Saj Convention Centre",
+    venueLines: ["Karakkamandapam", "Nemom", "Thiruvananthapuram"],
+  },
 
   gallerySection: {
-    title: "Photo Gallery",
-    subtitle: "Our Moments",
+    subtitle: "Gallery",
+    title: "Cherished Moments",
   },
+
+  // Exactly three curated frames → /photos/gallery-1..3.jpg (placeholders until added).
+  gallery: [
+    { id: 1, title: "Together", image: "/photos/gallery-1.jpg" },
+    { id: 2, title: "Joy", image: "/photos/gallery-2.jpg" },
+    { id: 3, title: "Forever", image: "/photos/gallery-3.jpg" },
+  ],
 
   rsvp: {
-    deadline: "2026-11-12",
-    email: "rsvp@example.com",
-    phone: "+91-XXXXX-XXXXX",
-  },
-
-  rsvpSection: {
+    subtitle: "RSVP",
     title: "Will You Join Us?",
-    subtitle: "Please Respond",
+    note: "We would be honoured to celebrate with you. Kindly let us know.",
+    phoneDisplay: "+91 91888 51528",
+    phoneE164: "919188851528",
   },
 
-  social: {
-    instagram: "https://instagram.com",
-    whatsapp: "https://wa.me/910000000000",
-    email: "hello@example.com",
+  footer: {
+    blessing:
+      "Your gracious presence and blessings will make this joyous occasion all the more memorable for us.",
+    complimentsLabel: "With Best Compliments from",
+    compliments: "Family & Friends",
   },
 
   music: {
     src: "/music/song.mp3",
-    title: "Wedding Theme",
-    artist: "Instrumental",
   },
 };
 
